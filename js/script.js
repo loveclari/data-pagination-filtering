@@ -43,7 +43,7 @@ const showPage = (list, page) => {
          `;        
       }      
    }
-   studentList.insertAdjacentHTML("beforeend", contentHtml);    
+   studentList.insertAdjacentHTML('beforeend', contentHtml);    
 }
 
 
@@ -55,7 +55,25 @@ Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 
+const addPagination = (list) => {
+   let numberPagButtons = list.length / itemsPerPage;
+   const linkList = document.querySelector('.link-list');
+   let link = ''
+   linkList.innerHTML = link;
+   for (let i = 0; i <= numberPagButtons; i++) {
+      link += `
+      <li>
+         <button type="button">${i}</button>
+      </li>`;  
+   }
+   linkList.insertAdjacentHTML('beforeend', link);
+   console.log(link)
+}
+
+
+
 
 
 // Call functions
 showPage(data,1);
+addPagination(data);
