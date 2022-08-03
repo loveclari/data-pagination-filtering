@@ -6,6 +6,8 @@ let itemsPerPage = 9;
 const studentList = document.querySelector('.student-list');
 const linkList = document.querySelector('.link-list');
 let activeButton = document.querySelector('button');
+const header = document.querySelector(".header");
+
 
 
 const showPage = (list, page) => {
@@ -90,14 +92,32 @@ const addPagination = (list) => {
    });
 }
 
+//Adding the searchbar dynamically
+
+
+const showSearch = () => {
+
+   let html = document.createElement('div'); 
+
+   html.innerHTML = `
+      <label for="search" class="student-search">
+         <span>Search by name</span>
+         <input id="search" placeholder="Search by name...">
+         <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+      </label>`;
+      
+   header.appendChild(html);
+
+}
+
+
+
+ // Call functions
+showPage(data, 1);
+addPagination(data);
+showSearch()
+
 
 // Resources:
 // adding and removing classes: https://stackoverflow.com/questions/26736587/how-to-add-and-remove-classes-in-javascript-without-jquery
 
-
-
-
-
-// Call functions
-showPage(data, 1);
-addPagination(data);
