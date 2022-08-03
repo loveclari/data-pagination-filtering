@@ -1,29 +1,18 @@
 /*
-Treehouse Techdegree:
-FSJS Project 2 - Data Pagination and Filtering
-*/
-
-
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-
-
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
+Global variables
+showPage function will create and insert/append the elements needed to display a "page" of nine students
 */
 let itemsPerPage = 9;
-let studentList = document.querySelector('.student-list');
-studentList.innerHTML = '';
-let contentHtml = ''
+const studentList = document.querySelector('.student-list');
+const linkList = document.querySelector('.link-list');
+let activeButton = document.querySelector('button');
 
 
 const showPage = (list, page) => {
+   let contentHtml = ''
+   studentList.innerHTML = contentHtml;
+
+
    let startIndex = (page * itemsPerPage) - itemsPerPage;
    let endIndex = page * itemsPerPage;
 
@@ -51,29 +40,64 @@ const showPage = (list, page) => {
 
 
 /*
-Create the `addPagination` function
+addPagination function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 
 const addPagination = (list) => {
-   let numberPagButtons = list.length / itemsPerPage;
-   const linkList = document.querySelector('.link-list');
+
+   //getting number of pages:
+
+   let numberPagButtons = Math.ceil(list.length / itemsPerPage);
+
+   //appenfing to HTML
+
    let link = ''
    linkList.innerHTML = link;
-   for (let i = 0; i <= numberPagButtons; i++) {
+
+
+   //looping through number of pages and attaching elements
+
+   for (let i = 1; i <= numberPagButtons; i++) {
       link += `
       <li>
-         <button type="button">${i}</button>
+         <button type="button">${[i]}</button>
       </li>`;  
    }
+
+   //appending to html
+
    linkList.insertAdjacentHTML('beforeend', link);
-   console.log(link)
+
+   let activeButton = linkList.querySelector('button');
+   activeButton.className = 'active';
+
+   //adding an eventlistener on the click searching for a specific target element
+
+   linkList.addEventListener ('click', (e) => {
+
+      const pageNumber = e.target.textContent;
+      let button = document.querySelector('.active');
+
+      if(e.target.tagName === 'BUTTON') {
+
+         button = button.classList.remove('active');
+         e.target.classList.add('active');
+
+         showPage(list, pageNumber);
+      }
+
+   });
 }
+
+
+// Resources:
+// adding and removing classes: https://stackoverflow.com/questions/26736587/how-to-add-and-remove-classes-in-javascript-without-jquery
 
 
 
 
 
 // Call functions
-showPage(data,1);
+showPage(data, 1);
 addPagination(data);
