@@ -115,6 +115,7 @@ const submit = document.querySelector('#submit');
 const performSearch = (searchInput, list) => {
 
    let searchedStudentList =[];
+   
 
    for(let i=0; i < list.length; i++) {
 
