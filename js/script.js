@@ -103,12 +103,46 @@ const showSearch = () => {
       <label for="search" class="student-search">
          <span>Search by name</span>
          <input id="search" placeholder="Search by name...">
-         <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
-      </label>`;
-      
+         <button type="button" id="submit"><img src="img/icn-search.svg" alt="Search icon"></button>
+      </label>`;  
    header.appendChild(html);
 
 }
+
+const search = document.querySelector('#search');
+const submit = document.querySelector('#submit'); 
+
+const performSearch = (searchInput, list) => {
+
+   let searchedStudentList =[];
+
+   for(let i=0; i < list.length; i++) {
+
+      const namesSearched = list[i].name.first.toLowerCase() || list[i].name.last.toLowerCase() ;
+
+      console.log(namesSearched)
+      
+      if(namesSearched.includes(searchInput.value.toLowerCase())){
+         searchedStudentList.push(list[i]);
+      }     
+   }
+
+   showPage(searchedStudentList, 1);
+   addPagination(searchedStudentList);
+
+}
+
+submit.addEventListener('click', (event) => {
+   event.preventDefault();
+   performSearch(search, data);
+  
+ });
+ 
+ /* submit listener */
+ search.addEventListener('keyup', () => {
+   performSearch(search, data);
+ 
+ });
 
 
 
@@ -116,8 +150,11 @@ const showSearch = () => {
 showPage(data, 1);
 addPagination(data);
 showSearch()
+performSearch(search, data)
 
 
 // Resources:
 // adding and removing classes: https://stackoverflow.com/questions/26736587/how-to-add-and-remove-classes-in-javascript-without-jquery
+// using includes: https://stackoverflow.com/questions/45065247/javascript-if-statement-using-includes
+// https://github.com/loveclari/simple-search
 
