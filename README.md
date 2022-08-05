@@ -2,9 +2,9 @@
 
 ### This page uses Vanilla Javascript
 
-### Gets data from json file to show a list of use profiles
+#### Gets data from a json file to show a list of user profiles
 
-### shows Pagination and filtering of data
+#### shows Pagination and filtering of data
 
-### Creates a search feature to search through the data 
+#### Creates a search feature to search through the data 
 
