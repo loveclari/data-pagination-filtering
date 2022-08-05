@@ -9,14 +9,19 @@ let activeButton = document.querySelector('button');
 const header = document.querySelector(".header");
 
 
-
 const showPage = (list, page) => {
+
+   // attaching data to html
+
    let contentHtml = ''
    studentList.innerHTML = contentHtml;
 
+   // setting up the page number variables
 
    let startIndex = (page * itemsPerPage) - itemsPerPage;
    let endIndex = page * itemsPerPage;
+
+   // looping through the list based on number of pages, creating html dynamically, attaching to the html
 
    for (let i = 0; i < list.length; i++) {
       if (i >= startIndex && i < endIndex ) {
@@ -36,10 +41,6 @@ const showPage = (list, page) => {
    }
    studentList.insertAdjacentHTML('beforeend', contentHtml);    
 }
-
-
-
-
 
 /*
 addPagination function
@@ -109,29 +110,42 @@ const showSearch = () => {
 
 }
 
-const search = document.querySelector('#search');
-const submit = document.querySelector('#submit'); 
-
 const performSearch = (searchInput, list) => {
 
-   let searchedStudentList =[];
-   
+   // creates a new array with searched names
 
+   let searchedStudentList =[];
+
+   // looping through the data
+   
    for(let i=0; i < list.length; i++) {
 
-      const namesSearched = list[i].name.first.toLowerCase() || list[i].name.last.toLowerCase() ;
-
-      console.log(namesSearched)
+      const namesSearched = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`;
       
       if(namesSearched.includes(searchInput.value.toLowerCase())){
          searchedStudentList.push(list[i]);
       }     
    }
 
+   // adding the pages and pagination numbers congruent with data
+
    showPage(searchedStudentList, 1);
    addPagination(searchedStudentList);
 
 }
+
+ // Call functions
+showPage(data, 1);
+addPagination(data);
+showSearch()
+
+
+// event variables initializers
+
+const search = document.querySelector('#search');
+const submit = document.querySelector('#submit'); 
+
+// event listeners for search and returning specific data
 
 submit.addEventListener('click', (event) => {
    event.preventDefault();
@@ -146,16 +160,9 @@ submit.addEventListener('click', (event) => {
  });
 
 
-
- // Call functions
-showPage(data, 1);
-addPagination(data);
-showSearch()
-performSearch(search, data)
-
-
 // Resources:
 // adding and removing classes: https://stackoverflow.com/questions/26736587/how-to-add-and-remove-classes-in-javascript-without-jquery
 // using includes: https://stackoverflow.com/questions/45065247/javascript-if-statement-using-includes
 // https://github.com/loveclari/simple-search
+// Help form Rachel Johnson
 
